@@ -7,9 +7,9 @@ current_date := FormatTime(A_Now, 'MMM dd yyyy HH:mm')
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; UPDATE THESE VARS WITH EACH NEW CATALOG!  ;
 ; ----------------------------------------------------;
-publication := "15 Apr 2025 6:55 AM"
-expiry := "14 July 2025 6:55 PM"
-breadcrumb := "-25su"
+publication := "04 Nov 2025 6:55 AM"
+expiry := "13 Apr 2026 6:55 PM"
+breadcrumb := "-26WS"
 ;-----------------------------------------------------;
 ; Work-Specific Editing Shortcuts
 ; ----------------------------------------------------;
@@ -23,6 +23,8 @@ breadcrumb := "-25su"
 +^n::Send " *NEW{!}*"
 ; shift+ctrl o: paste " online"
 +^o:: Send " online"
+; alt+ctrl g: paste " online-$breadcrumb" eg. "online-26WS"
++^g:: Send " online" . breadcrumb
 ; alt+ctrl o: paste " (online)"
 !^o:: Send " (online)"
 ; shift+ctrl f: paste " Flex Online"
@@ -30,6 +32,9 @@ breadcrumb := "-25su"
 ;
 ; alt-hyphen to replace hyphens with emdashes in clipboard text
 !-::
+;
+; alt-r: paste "Register" for newsletter course buttons
+!r:: Send "Register"
 {
    Clip0 := ClipBoardAll()
    A_ClipBoard := StrReplace(A_ClipBoard, "-", "–")
