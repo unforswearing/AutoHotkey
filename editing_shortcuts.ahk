@@ -4,12 +4,15 @@
 ; shift+alt d: insert the current date
 current_date := FormatTime(A_Now, 'MMM dd yyyy HH:mm')
 +!d::Send current_date
+; ----------------------------------------------------;
+; type "#confcc" to paste the confirmation text below when updating CC lists.
+:*T:#confcc::Thanks, confirming <> has been added to the Personal Enrichment newsletter list.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; UPDATE THESE VARS WITH EACH NEW CATALOG!  ;
 ; ----------------------------------------------------;
-publication := "04 Nov 2025 6:55 AM"
-expiry := "13 Apr 2026 6:55 PM"
-breadcrumb := "-26WS"
+publication := "14 Apr 2026 6:55 AM"
+expiry := "14 Jul 2026 6:55 PM"
+breadcrumb := "-26su"
 ;-----------------------------------------------------;
 ; Work-Specific Editing Shortcuts
 ; ----------------------------------------------------;
@@ -32,6 +35,15 @@ breadcrumb := "-26WS"
 ;
 ; alt-hyphen to replace hyphens with emdashes in clipboard text
 !-::
+{
+  Clip0 := ClipBoardAll()
+  A_ClipBoard := StrReplace(A_ClipBoard, "-", "–")
+  Send "^v"
+  Sleep 300
+  A_ClipBoard := Clip0
+  ObjSetCapacity(Clip0, 0)
+  Return
+}
 ;
 ; alt-r: paste "Register" for newsletter course buttons
 !r:: Send "Register"
@@ -57,6 +69,70 @@ breadcrumb := "-26WS"
    ObjSetCapacity(Clip0, 0)
    Return
 }
+;
+; ----------------------------
+; Upper / Lower / Title Case cliboard text
+; from https://www.autohotkey.com/boards/viewtopic.php?style=1&p=553731#p553731
+ClipboardPasteUppercase(*) {
+  A_Clipboard := ""
+  SendInput("^c")
+  if (!ClipWait(1, 1))
+    return
+  str := A_Clipboard
+  if (str == "")
+    return
+  A_Clipboard := format("{:U}", str)
+  if (!ClipWait(0.5, 0))
+    return
+  SendInput("^v")
+  Sleep(500)
+}
+ClipboardPasteLowercase(*) {
+  A_Clipboard := ""
+  SendInput("^c")
+  if (!ClipWait(1, 1))
+    return
+  str := A_Clipboard
+  if (str == "")
+    return
+  A_Clipboard := format("{:l}", str)
+  if (!ClipWait(0.5, 0))
+    return
+  SendInput("^v")
+  Sleep(500)
+}
+ClipboardPasteTitlecase(*) {
+  A_Clipboard := ""
+  SendInput("^c")
+  if (!ClipWait(1, 1))
+    return
+  str := A_Clipboard
+  if (str == "")
+    return
+  A_Clipboard := format("{:T}", str)
+  if (!ClipWait(0.5, 0))
+    return
+  SendInput("^v")
+  Sleep(500)
+}
+ClipboardPasteSentenceCase(*) {
+  A_Clipboard := ""
+  SendInput("^c")
+  if (!ClipWait(1, 1))
+    return
+  str := A_Clipboard
+  if (str == "")
+    return
+  A_Clipboard := RegExReplace(str, "(?:^|\.|\R)[- 0-9\*\(]*\K(.)([^\.\r\n]*)", "$U1$L2")
+  if (!ClipWait(0.5, 0))
+    return
+  SendInput("^v")
+  Sleep(500)
+}
++^u::ClipboardPasteUppercase()
++^l::ClipboardPasteLowercase()
++^t::ClipboardPasteTitlecase()
+;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Emulate MacOS
 ;-----------------
