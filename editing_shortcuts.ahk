@@ -6,7 +6,11 @@ current_date := FormatTime(A_Now, 'MMM dd yyyy HH:mm')
 +!d::Send current_date
 ; ----------------------------------------------------;
 ; type "#confcc" to paste the confirmation text below when updating CC lists.
-:*T:#confcc::Thanks, confirming <> has been added to the Personal Enrichment newsletter list.
+:*T:#confcc::
+{
+  email := InputBox('Email:', 'Email', 'w400 h100').value
+  Send('Thanks, confirming that "' email '" has been added to the Personal Enrichment newsletter list.`n`nAlvin')
+}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; UPDATE THESE VARS WITH EACH NEW CATALOG!  ;
 ; ----------------------------------------------------;
@@ -170,3 +174,4 @@ CapsLock::Control
 ;     Send "{Ctrl Up}"
 ;   }
 ; }
+
