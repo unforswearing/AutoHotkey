@@ -14,9 +14,9 @@ current_date := FormatTime(A_Now, 'MMM dd yyyy HH:mm')
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; UPDATE THESE VARS WITH EACH NEW CATALOG!  ;
 ; ----------------------------------------------------;
-publication := "14 Apr 2026 6:55 AM"
-expiry := "14 Jul 2026 6:55 PM"
-breadcrumb := "-26su"
+publication := "14 Jul 2026 6:55 AM"
+expiry := "17 Nov 2026 6:55 PM"
+breadcrumb := "-26Fall"
 ;-----------------------------------------------------;
 ; Work-Specific Editing Shortcuts
 ; ----------------------------------------------------;
@@ -73,6 +73,9 @@ breadcrumb := "-26su"
    ObjSetCapacity(Clip0, 0)
    Return
 }
+;
+; alt-c: alias to ctrl-c, similar to cmd-c on macos
+!c:: Send "^c"
 ;
 ; ----------------------------
 ; Upper / Lower / Title Case cliboard text
@@ -174,4 +177,3 @@ CapsLock::Control
 ;     Send "{Ctrl Up}"
 ;   }
 ; }
-
